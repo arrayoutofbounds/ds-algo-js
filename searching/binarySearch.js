@@ -1,7 +1,7 @@
 function binarySearch(arr, value){
     let start = 0; // left pointer
     let end = arr.length - 1; // right pointer
-    let middle = Math.floor((start+end)/2); // middle pointer
+    let middle = Math.floor((start+end)/2); // middle pointer, round down since there can be even number of elements hence no middle element
 
     while(arr[middle] !== value && start <= end){
         if(value < arr[middle]){
