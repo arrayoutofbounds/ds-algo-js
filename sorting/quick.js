@@ -20,7 +20,7 @@ function pivot(arr, start = 0, end = arr.length-1 ){
 // console.log(pivot([4,8,2,1,5,7,6,3]));
 
 function quick(arr, left = 0, right = arr.length-1){
-    // base condition
+    // base condition, this means there is only 1 element left.
     if(left < right){
         let pivotIndex = pivot(arr, left, right);
 
