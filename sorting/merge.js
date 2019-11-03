@@ -16,4 +16,19 @@ function merge(a,b){
     return result;
 }
 
-console.log(merge([1,10,50], [2,14,99,100]));
+function mergeSort(arr){
+    // split into smaller arrays
+    // call mergesort on them until length of array is 1 or 0.
+    
+    // base case for recursion
+    if(arr.length <= 1){
+        return arr;
+    }
+
+    let mid = Math.floor(arr.length/2);
+    let left = mergeSort(arr.slice(0,mid));
+    let right = mergeSort(arr.slice(mid));
+    return merge(left, right);
+}
+
+console.log(mergeSort([1,10,50,2,14,99,100]));
