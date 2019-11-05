@@ -75,13 +75,52 @@ class DoublyLinkedList {
         this.length++;
         return newNode;
     }
+
+    get(index){
+        if(index < 0 || index >= this.length) return null;
+
+        let current, count;
+        if(index <= this.length/2){
+            count = 0;
+            current = this.head;
+    
+            while(count !== index){
+                current = current.next;
+                count++;
+            }
+            return current;
+        }else{
+            count = this.length-1;
+            current = this.tail;
+            while(count !== index){
+                current = current.prev;
+                count--;
+            }
+        }
+        return current;
+    }
+
+    set(index, value){
+        let foundNode = this.get(index);
+        if(foundNode !== null){
+            foundNode.val = value
+            return true;
+        }
+        return false;
+    }
+
+    insert(value, index){
+        let oldNode = this.get(index);
+        
+    }
 }
 
 let list = new DoublyLinkedList();
 
 list.push(99);
 list.push(100);
-list.shift()
-list.shift()
 list.unshift('harry');
+// console.log(list.get(0));
+// console.log(list.get(2));
+console.log(list.set(2, 101));
 console.log(list);
