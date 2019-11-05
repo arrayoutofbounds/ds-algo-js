@@ -84,15 +84,29 @@ class SinglyLinkedList {
         let current = this.head;
         while(counter !== index){
             current = current.next;
-            count++;
+            counter++;
         }
         return current;
+    }
+
+    set(val, index){
+        let foundNode = this.get(index);
+        if(foundNode){
+            foundNode.val = val;
+            return true;
+        }
+        return false;
     }
 }
 
 let list = new SinglyLinkedList();
 list.push('hello');
 list.push('there');
-list.unshift(1);
-console.log(list.get(0));
+// list.pop();
+// console.log(list);
+// list.pop();
+// list.unshift(1);
+// console.log(list.get(0));
+console.log(list.set('val', 1))
+console.log(list.get(1))
 // console.log(list);
