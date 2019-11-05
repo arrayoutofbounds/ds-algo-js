@@ -88,7 +88,6 @@ class DoublyLinkedList {
                 current = current.next;
                 count++;
             }
-            return current;
         }else{
             count = this.length-1;
             current = this.tail;
@@ -110,17 +109,35 @@ class DoublyLinkedList {
     }
 
     insert(value, index){
-        let oldNode = this.get(index);
-        
+        if(index < 0 || index > this.length) return undefined;
+        if(index === 0 ) return !! this.unshift(value);
+        if(index === this.length) return !! this.push(value);
+
+        let newNode = new Node(value);
+        let beforeNode = this.get(index-1); // get previous node
+        let afterNode = beforeNode.next;
+
+        beforeNode.next = newNode;
+        newNode.prev = beforeNode;
+
+        newNode.next = afterNode;
+        afterNode.prev = newNode;
+
+        this.length++;
+        return this;
     }
 }
 
 let list = new DoublyLinkedList();
 
-list.push(99);
-list.push(100);
-list.unshift('harry');
+// list.push(99);
+// list.push(100);
+// list.unshift('harry');
 // console.log(list.get(0));
 // console.log(list.get(2));
-console.log(list.set(2, 101));
+// console.log(list.set(2, 101));
+list.push('harry')
+list.push('ron')
+
+list.insert('hermoine',0);
 console.log(list);
