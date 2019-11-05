@@ -59,6 +59,22 @@ class DoublyLinkedList {
         this.length--;
         return oldHead;
     }
+
+    unshift(value){
+        let newNode = new Node(value);
+
+        if(this.length === 0 ){
+            this.head = newNode;
+            this.tail = newNode;
+        }else{
+            newNode.next = this.head;
+            this.head.prev = newNode;
+            this.head = newNode;
+        }
+
+        this.length++;
+        return newNode;
+    }
 }
 
 let list = new DoublyLinkedList();
@@ -67,4 +83,5 @@ list.push(99);
 list.push(100);
 list.shift()
 list.shift()
+list.unshift('harry');
 console.log(list);
