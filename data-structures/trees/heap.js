@@ -33,13 +33,12 @@ class MaxBinaryHeap {
 
     extractMax(){
         let max = this.values.shift();
-        let newFirst = this.values.pop();
-
         if(this.values.length === 0){
             this.values = [];
             return max;
         }
 
+        let newFirst = this.values.pop();
         this.values.unshift(newFirst);
 
         // start re adjusting heap
@@ -74,22 +73,57 @@ class MaxBinaryHeap {
 
         return max;
     }
+
+    extractMaxRecursive(){
+        let max = this.values.shift();
+        if(this.values.length === 0){
+            this.values = [];
+            return max;
+        }
+
+        let newFirst = this.values.pop();
+        this.values.unshift(newFirst);
+        this.maxHeapify(0); // start heapify from the root;
+
+        return max;
+    }
+
+    // RECURSIVE AND SOOOOOO MUCH CLEANER
+    maxHeapify(i){
+        let leftIndex = (2* i) + 1;
+        let rightIndex = (2* i) + 2;
+        let largest = i;
+        let heapSize = this.values.length;
+        let heap = this.values;
+
+        if(leftIndex < heapSize && heap[leftIndex] > heap[i]){
+            largest = leftIndex;
+        }
+
+        if(rightIndex < heapSize && heap[rightIndex] > heap[largest]){ // DAMN SMART ALGORITHM. READ THIS LINE TWICE
+            largest = rightIndex;
+        }
+        if(largest !== i){
+            this.swap(i, largest);
+            this.maxHeapify(largest);
+        }
+    }
 }
 
 let h = new MaxBinaryHeap();
 
-// h.insert(41);
-// h.insert(39);
-// h.insert(33);
-// h.insert(18);
-// h.insert(27);
-// h.insert(12);
-// h.insert(55);
-
+h.insert(41);
+h.insert(39);
+h.insert(33);
+h.insert(18);
+h.insert(27);
 h.insert(12);
+h.insert(55);
+
+// h.insert(12);
+// h.insert(12);
 
 console.log(h.values);
 
-h.extractMax();
-
+h.extractMaxRecursive();
 console.log(h.values);
