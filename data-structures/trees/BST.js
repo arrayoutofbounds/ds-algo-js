@@ -82,8 +82,8 @@ class BST {
             this.root = newNode;
         }else if(value < parent.value){
             parent.left = newNode;
-        }else{
-            parent.right = newNode;
+        }else{ 
+            parent.right = newNode; // this happens when greater than or equal to. so if equal, its jsut replacing the node.
         }
 
         return this;
@@ -136,6 +136,19 @@ class BST {
         return visited;
     }
 
+    dfsPreorder(){
+        let visited = [];
+        function helper(node){
+            if(!node) return;
+
+            visited.push(node);
+            if(node.left) helper(node.left);
+            if(node.right) helper(node.right);
+        }
+        helper(this.root);
+        return visited;
+    }
+
     // min
     // max
     // delete
@@ -167,4 +180,6 @@ tree.insertIterativeBetter(20)
 
 // console.log(tree);
 
-console.log(tree.bfs());
+// console.log(tree.bfs());
+
+console.log(tree.dfsPreorder());
