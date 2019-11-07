@@ -91,10 +91,9 @@ class BST {
 
     // recursive
     find(node, value){
-        if(node === null) return false;
-        if(node.value === value){
-            return true;
-        }else if(value < node.value){
+        if(node === null || node.value === value) return node;
+        
+        if(value < node.value){
             return this.find(node.left, value);
         }else{
             return this.find(node.right, value);
@@ -143,6 +142,33 @@ class BST {
 
             visited.push(node);
             if(node.left) helper(node.left);
+            if(node.right) helper(node.right);
+        }
+        helper(this.root);
+        return visited;
+    }
+
+    dfsPostorder(){
+        let visited = [];
+        function helper(node){
+            if(!node) return;
+
+            if(node.left) helper(node.left);
+            if(node.right) helper(node.right);
+
+            visited.push(node);
+        }
+        helper(this.root);
+        return visited;
+    }
+
+    dfsInorder(){
+        let visited = [];
+        function helper(node){
+            if(!node) return;
+
+            if(node.left) helper(node.left);
+            visited.push(node);
             if(node.right) helper(node.right);
         }
         helper(this.root);
