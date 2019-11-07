@@ -33,18 +33,22 @@ class Queue {
             this.last = null;
         }
         this.first = this.first.next;
+        temp.next = null;
         this.size--;
-        return temp.value;
+
+        return temp.val;
     }
 }
 
-let q = new Queue();
+module.exports = Queue;
 
-q.enqueue(1);
-q.enqueue(2);
-console.log(q.enqueue(3));
+// let q = new Queue();
 
-q.dequeue();
+// q.enqueue(1);
+// q.enqueue(2);
+// console.log(q.enqueue(3));
 
-console.log(q);
+// q.dequeue();
+
+// console.log(q);
 

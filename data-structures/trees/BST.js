@@ -6,11 +6,14 @@ class Node {
     }
 }
 
+const Queue = require('../Queue/list');
+
 class BST {
     constructor(){
         this.root = null;
     }
 
+    // this is crap....do not use it
     insert(value){
         let newNode = new Node(value);
         if(this.root === null){
@@ -59,17 +62,109 @@ class BST {
 
         return node;
     }
+
+    insertIterativeBetter(value){
+        let newNode = new Node(value);
+
+        let current = this.root;
+        let parent = null;
+
+        while(current !== null){
+            parent = current;
+            if(value < current.value){
+                current = current.left;
+            }else{
+                current = current.right;
+            }
+        }
+
+        if(parent === null){
+            this.root = newNode;
+        }else if(value < parent.value){
+            parent.left = newNode;
+        }else{
+            parent.right = newNode;
+        }
+
+        return this;
+    }
+
+    // recursive
+    find(node, value){
+        if(node === null) return false;
+        if(node.value === value){
+            return true;
+        }else if(value < node.value){
+            return this.find(node.left, value);
+        }else{
+            return this.find(node.right, value);
+        }
+    }
+
+    findIterative(value){
+        if(this.root === null) return false;
+
+        let current = this.root;
+        let isFound = false;
+
+        while(current && !isFound){
+            if(current.value == value){
+                isFound = true;
+            }else if(value < current.value){
+                current = current.left;
+            }else{
+                current = current.right;
+            }
+        }
+
+        return isFound;
+    }
+
+    bfs(){
+        let node = this.root;
+        let visited = [];
+        let q = new Queue();
+
+        q.enqueue(node);
+        while(q.size){
+            node = q.dequeue();
+            visited.push(node); // what we return
+
+            if(node.left) q.enqueue(node.left);
+            if(node.right) q.enqueue(node.right);
+        }
+        return visited;
+    }
+
+    // min
+    // max
+    // delete
 }
 
 let tree = new BST();
 
-let node = tree.insertRecursive(null, 10);
-tree.insertRecursive(node, 5);
-tree.insertRecursive(node, 13);
-tree.insertRecursive(node, 11);
-// tree.insert(2);
-// tree.insert(16);
-console.log(tree);
+// let node = tree.insertRecursive(null, 10);
+// tree.insertRecursive(node, 5);
+// tree.insertRecursive(node, 13);
+// tree.insertRecursive(node, 11);
 
-console.log(tree.root.right);
-console.log(tree.root.right.left);
+
+
+// tree.insertIterativeBetter(2);
+// tree.insertIterativeBetter(16);
+// tree.insertIterativeBetter(15);
+// console.log(tree);
+
+// console.log(tree.findIterative(15));
+
+
+tree.insertIterativeBetter(10)
+tree.insertIterativeBetter(6)
+tree.insertIterativeBetter(15)
+tree.insertIterativeBetter(3)
+tree.insertIterativeBetter(8)
+tree.insertIterativeBetter(20)
+
+// console.log(tree);
+
+console.log(tree.bfs());
