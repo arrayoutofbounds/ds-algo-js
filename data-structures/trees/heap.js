@@ -25,12 +25,6 @@ class MaxBinaryHeap {
         return this.values;
     }
 
-    swap(i, j){
-        let temp = this.values[i];
-        this.values[i] = this.values[j];
-        this.values[j] = temp;
-    }
-
     extractMax(){
         let max = this.values.shift();
         if(this.values.length === 0){
@@ -125,5 +119,5 @@ h.insert(55);
 
 console.log(h.values);
 
-h.extractMaxRecursive();
-console.log(h.values);
+// h.extractMaxRecursive();
+// console.log(h.values);
