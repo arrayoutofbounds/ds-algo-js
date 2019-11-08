@@ -83,6 +83,30 @@ class HashTable {
 
         return undefined;
     }
+
+    keys(){
+        let keysArr = [];
+        for(let i of this.keyMap){
+            if(i){
+                for(let j  of i){
+                    if(!keysArr.includes(j[0])) keysArr.push(j[0]); // remove any duplicate values
+                }
+            }
+        }
+        return keysArr;
+    }
+
+    values(){
+        let valuesArr = [];
+        for(let i of this.keyMap){
+            if(i){
+                for(let j  of i){
+                    if(!valuesArr.includes(j[1])) valuesArr.push(j[1]); // remove any duplicate values
+                }
+            }
+        }
+        return valuesArr;
+    }
 }
 
 let ht = new HashTable();
@@ -92,8 +116,9 @@ ht.set('dogs', 'i love them');
 ht.set('hi', 'bye');
 ht.set('hi', 'bye');
 
-console.log(ht.get("plum"));
-console.log(ht.get("hi"));
-console.log(ht.get("dogs"));
+// console.log(ht.get("plum"));
+// console.log(ht.get("hi"));
+// console.log(ht.get("dogs"));
 
-// console.log(ht.keyMap)
+console.log(ht.values())
+console.log(ht.keys())
