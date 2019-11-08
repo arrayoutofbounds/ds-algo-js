@@ -2,6 +2,7 @@ class Node {
   constructor(value, priority) {
     this.value = value;
     this.priority = priority;
+    //@TODO add in time here to ensure that someone with same priority gets chosen based on insertion time
   }
 }
 
@@ -90,5 +91,3 @@ console.log(ER.dequeue());
 console.log(ER.dequeue());
 console.log(ER.dequeue());
 console.log(ER.dequeue());
-
-// console.log(ER.values);
