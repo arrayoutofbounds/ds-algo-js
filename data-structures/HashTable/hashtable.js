@@ -16,7 +16,7 @@
 
 // hash part
 // hash function = function that converts keys into valid indices which are similar given same input.
-// hash function always gives back same sized output given any input
+// hash function always gives back same sized output given any inpu8t
 // you cannot work backwards.
 
 // hash function should be:
@@ -26,5 +26,74 @@
 // we want it in O(1);
 
 
-// hash('pink', 9); gets number out between 0-8 included.
+// hash('pink', 9); gets number out between 0-8 included so we can store it in a valid posirion,n
 
+
+function hash(key, arrayLen) {
+    let total = 0;
+    let WEIRD_PRIME = 31;
+    for (let i = 0; i < Math.min(key.length, 100); i++) {
+        let char = key[i];
+        let value = char.charCodeAt(0) - 96;
+        total = (total * WEIRD_PRIME + value) % arrayLen;
+    }
+    return total;
+}
+
+// console.log(hash('pink', 11));
+// console.log(hash('cyan', 11));
+// console.log(hash('blue', 11));
+// console.log(hash('red', 11));
+// console.log(hash('purple', 11));
+
+class HashTable {
+    constructor(size = 53) {
+        this.keyMap = new Array(size);
+    }
+
+    _hash(key) {
+        let total = 0;
+        let WEIRD_PRIME = 31;
+        for (let i = 0; i < Math.min(key.length, 100); i++) {
+            let char = key[i];
+            let value = char.charCodeAt(0) - 96;
+            total = (total * WEIRD_PRIME + value) % this.keyMap.length;
+        }
+        return total;
+    }
+
+    set(key, value){
+        let index = this._hash(key);
+        if(!this.keyMap[index]){
+            this.keyMap[index] = [];
+        }
+        this.keyMap[index].push([key, value]);
+    }
+
+    get(key){
+        let index = this._hash(key);
+        let value = this.keyMap[index];
+        if(value){
+            for(let i = 0; i < value.length; i++){
+                if(value[i][0] === key) {
+                    return value[i][1];
+                }
+            }
+        }
+
+        return undefined;
+    }
+}
+
+let ht = new HashTable();
+
+ht.set('pink', '#a00000');
+ht.set('dogs', 'i love them');
+ht.set('hi', 'bye');
+ht.set('hi', 'bye');
+
+console.log(ht.get("plum"));
+console.log(ht.get("hi"));
+console.log(ht.get("dogs"));
+
+// console.log(ht.keyMap)
