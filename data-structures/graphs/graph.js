@@ -89,6 +89,27 @@ class Graph{
         }
         return result;
     }
+
+    bfs(start){
+        let q = [start];
+        let visited = {};
+        let result = [];
+        visited[start] = true;
+
+        let currentVertex;
+        while(q.length){
+            currentVertex= q.shift();
+            result.push(currentVertex);
+
+            this.adjacencyList[currentVertex].forEach((neighbour) => {
+                if(!visited[neighbour]){
+                    visited[neighbour] = true;
+                    q.push(neighbour);
+                }
+            })
+        }
+        return result;
+    }
 }
 
 let g = new Graph();
@@ -127,4 +148,4 @@ g.addEdge('E','F');
 
 // console.log(g.adjacencyList);
 
-console.log(g.dfsIterative('A'));
+console.log(g.bfs('A'));
