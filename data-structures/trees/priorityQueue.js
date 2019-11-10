@@ -37,17 +37,17 @@ class PriorityQueue {
   }
 
   dequeue() {
-    let max = this.values.shift();
-    if (this.values.length === 0) {
+    let max = this.values.shift(); // we are taking the top priority out.
+    if (this.values.length === 0) { // if no more nodes, we are done
       this.values = [];
       return max;
     }
 
-    let newFirst = this.values.pop();
-    this.values.unshift(newFirst);
-    this.maxHeapify(0); // start heapify from the root;
+    let newFirst = this.values.pop(); // get the last node
+    this.values.unshift(newFirst); // put it as the root
+    this.maxHeapify(0); // start heapify from the root; this is where you re order things according to priority.
 
-    return max;
+    return max; // return removed node
   }
 
   // RECURSIVE AND SOOOOOO MUCH CLEANER
@@ -58,15 +58,11 @@ class PriorityQueue {
     let heapSize = this.values.length;
     let heap = this.values;
 
-    if (leftIndex < heapSize && heap[leftIndex].priority < heap[i].priority) {
+    if (leftIndex < heapSize && heap[leftIndex].priority < heap[i].priority) { // THIS MAKES IT A MIN HEAP
       highest = leftIndex;
     }
 
-    if (
-      rightIndex < heapSize &&
-      heap[rightIndex].priority < heap[highest].priority
-    ) {
-      // DAMN SMART ALGORITHM. READ THIS LINE TWICE
+    if ( rightIndex < heapSize && heap[rightIndex].priority < heap[highest].priority) { // DAMN SMART ALGORITHM. READ THIS LINE TWICE
       highest = rightIndex;
     }
     if (highest !== i) {
