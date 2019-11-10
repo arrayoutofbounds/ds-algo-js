@@ -21,7 +21,7 @@ class PriorityQueue {
     let newNode = new Node(value, priority);
     this.values.push(newNode);
 
-    let index = this.values.length - 1;
+    let index = this.values.length - 1; // since its being inserted at the end via a push method
     let parent = Math.floor((index - 1) / 2);
 
     while (
@@ -52,8 +52,8 @@ class PriorityQueue {
 
   // RECURSIVE AND SOOOOOO MUCH CLEANER
   maxHeapify(i) {
-    let leftIndex = 2 * i + 1;
-    let rightIndex = 2 * i + 2;
+    let leftIndex = 2 * i + 1; // get left child
+    let rightIndex = 2 * i + 2; // get right child
     let highest = i;
     let heapSize = this.values.length;
     let heap = this.values;
@@ -77,17 +77,19 @@ class PriorityQueue {
   }
 }
 
-let ER = new PriorityQueue();
+module.exports = PriorityQueue
 
-ER.enqueue('common cold', 5);
-ER.enqueue('gunshot', 1);
-ER.enqueue('high fever', 4);
-ER.enqueue('broken arm', 2);
-ER.enqueue('glass in foot', 3);
+// let ER = new PriorityQueue();
 
-console.log(ER.dequeue());
-console.log(ER.dequeue());
-console.log(ER.dequeue());
-console.log(ER.dequeue());
-console.log(ER.dequeue());
-console.log(ER.dequeue());
+// ER.enqueue('common cold', 5);
+// ER.enqueue('gunshot', 1);
+// ER.enqueue('high fever', 4);
+// ER.enqueue('broken arm', 2);
+// ER.enqueue('glass in foot', 3);
+
+// console.log(ER.dequeue());
+// console.log(ER.dequeue());
+// console.log(ER.dequeue());
+// console.log(ER.dequeue());
+// console.log(ER.dequeue());
+// console.log(ER.dequeue());
